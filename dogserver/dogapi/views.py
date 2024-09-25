@@ -71,25 +71,31 @@ class DogViewSet(ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response({'success': 'This  created a dog.'}, status=status.HTTP_200_OK)
-        return Response({'success': 'This should have created a dog but did not .'}, status=status.HTTP_200_OK)
+        return Response({'error': 'This should have created a dog but did not .'}, status=status.HTTP_200_OK)
     
     # Retrive a dog by ID
     def retrieve(self, request, pk=None):
         queryset = Dog.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = DogSerializer(user)
+        dog = get_object_or_404(queryset, pk=pk)
+        serializer = DogSerializer(dog)
         return Response(serializer.data)
     
-    # Needs to update a dog by ID
+    # This updates a dog by ID
     def update(self, request, pk=None):
-        return Response({'success': 'This would update a dog by ID.'}, status=status.HTTP_200_OK)
+        queryset = Dog.objects.all()
+        dog = get_object_or_404(queryset, pk=pk)
+        serializer = DogSerializer(dog, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'success': 'This  updated a dog by ID.'}, status=status.HTTP_200_OK)
+        return Response({'error': 'This should have updated a dog by ID.'}, status=status.HTTP_417_EXPECTATION_FAILED)
     
     # This deletes a dog
     def destroy(self, request, pk=None):
         queryset = Dog.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = DogSerializer(user)
-        user.delete()
+        dog = get_object_or_404(queryset, pk=pk)
+        serializer = DogSerializer(dog)
+        dog.delete()
         return Response({'success': 'This deleted a dog.'}, status=status.HTTP_200_OK)
 
 
@@ -112,23 +118,29 @@ class BreedViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response({'success': 'This  created a breed.'}, status=status.HTTP_200_OK)
-        return Response({'success': 'This should have created a breed but did not .'}, status=status.HTTP_200_OK)
+        return Response({'error': 'This should have created a breed but did not .'}, status=status.HTTP_417_EXPECTATION_FAILED)
 
     # Retrieve a breed by ID
     def retrieve(self, request, pk=None):
         queryset = Breed.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = BreedSerializer(user)
+        breed = get_object_or_404(queryset, pk=pk)
+        serializer = BreedSerializer(breed)
         return Response(serializer.data)
     
-    # Needs to update a breed by ID
+    # This updates a breed by ID
     def update(self, request, pk=None):
-        return Response({'success': 'This would update a breed by ID.'}, status=status.HTTP_200_OK)
+        queryset = Breed.objects.all()
+        breed = get_object_or_404(queryset, pk=pk)
+        serializer = BreedSerializer(breed, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'success': 'This updated a breed by ID.'}, status=status.HTTP_200_OK)
+        return Response({'error': 'This should have updated a breed by ID.'}, status=status.HTTP_417_EXPECTATION_FAILED)
     
     # This deletes a breed
     def destroy(self, request, pk=None):
         queryset = Breed.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = BreedSerializer(user)
-        user.delete()
+        breed = get_object_or_404(queryset, pk=pk)
+        serializer = BreedSerializer(breed)
+        breed.delete()
         return Response({'success': 'This deleted a breed.'}, status=status.HTTP_200_OK)
