@@ -22,7 +22,7 @@ from rest_framework.response import Response
 from dogapi.serializers import DogSerializer
 
 
-# Get Dog by ID 
+# Get Dog by ID  -- Works
 @api_view(['GET'])
 def rest_get_dog(request, dog_id):
     try:
@@ -65,12 +65,8 @@ class BreedViewSet(viewsets.ViewSet):
         return Response(serializer.data)
   
     def retrieve(self, request, pk=None):
-        queryset = Dog.objects.all()
+        queryset = Breed.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = BreedSerializer(user)
         return Response(serializer.data)
 
-breed_list = BreedViewSet.as_view({'get': 'list'})
-breed_list = BreedViewSet.as_view({'post': 'list'})
-# Not using this yet
-breed_detail = BreedViewSet.as_view({'get': 'retrieve'})

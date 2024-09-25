@@ -12,10 +12,12 @@ from dogapi.views import rest_get_breed
 #from dogapi.views import breed_list
 
 from dogapi.views import DogViewSet
+from dogapi.views import BreedViewSet
 from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 
 router.register(r'api/dogs', DogViewSet, basename='dog')
+router.register(r'api/breeds', BreedViewSet, basename='breed')
 from rest_framework.routers import DefaultRouter
 
 urlpatterns = router.urls
