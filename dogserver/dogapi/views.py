@@ -51,14 +51,16 @@ def rest_get_breed(request, breed_id):
         return Response({'error': 'Breed not found.'}, status=status.HTTP_404_NOT_FOUND)
     
 ###################################################################################################
-
+# Note I used HTTP_417_EXPECTATION_FAILED in debuging vs. 404, as when I was calling /dog/# I would get 404 for the dog if it was alerady gone and this made it is easier to differentiate if it was my code or if I need to make more dogs and brreds 
+#
 # Viewset for dogs  
 
-#####Looks good!!!!
+##### Looks good!!!!
 class DogViewSet(ModelViewSet):
     serializer_class = DogSerializer
     queryset = Dog.objects.all()
 #######
+
     #### Get list of all dogs
     def list(self, request):
         queryset = Dog.objects.all()
@@ -70,8 +72,8 @@ class DogViewSet(ModelViewSet):
         serializer = DogSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'success': 'This  created a dog.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'This should have created a dog but did not .'}, status=status.HTTP_200_OK)
+            return Response({'success': 'This created a dog.'}, status=status.HTTP_200_OK)
+        return Response({'error': 'This should have created a dog but did not .'}, status=status.HTTP_417_EXPECTATION_FAILED)
     
     # Retrive a dog by ID
     def retrieve(self, request, pk=None):
