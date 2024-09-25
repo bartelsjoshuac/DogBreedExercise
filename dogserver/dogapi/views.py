@@ -6,15 +6,21 @@ from rest_framework.decorators import api_view
 from .models import Dog
 from .models import Breed 
 
-
-
-
-
 # Dogs
 from .serializers import DogSerializer
 
 # Breeds
 from .serializers import BreedSerializer
+
+
+# Lets try ViewSets instead of snippets - Works
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from rest_framework import viewsets
+from rest_framework.response import Response
+
+from dogapi.serializers import DogSerializer
+
 
 # Get Dog by ID  -- Works
 @api_view(['GET'])
@@ -37,3 +43,34 @@ def rest_get_breed(request, breed_id):
         return Response({'error': 'Breed not found.'}, status=status.HTTP_404_NOT_FOUND)
     
 
+# Viewset for dogs  
+class DogViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Dog.objects.all()
+        serializer = DogSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Dog.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = DogSerializer(user)
+        return Response(serializer.data)
+
+dog_list = DogViewSet.as_view({'get': 'list'})
+dog_detail = DogViewSet.as_view({'get': 'retrieve'})
+
+# Viewset for breeds  
+class BreedViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Breed.objects.all()
+        serializer = BreedSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = Dog.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = BreedSerializer(user)
+        return Response(serializer.data)
+
+breed_list = BreedViewSet.as_view({'get': 'list'})
+breed_detail = BreedViewSet.as_view({'get': 'retrieve'})
