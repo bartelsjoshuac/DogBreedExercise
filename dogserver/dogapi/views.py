@@ -45,26 +45,70 @@ def rest_get_breed(request, breed_id):
 # NEW #########################################################################################
 # Viewset for dogs  
 class DogViewSet(viewsets.ViewSet):
+    # This is good
     def list(self, request):
         queryset = Dog.objects.all()
         serializer = DogSerializer(queryset, many=True)
         return Response(serializer.data)
 
+    # Needs to create a dog
+    def create(self, request):
+        queryset = Dog.objects.all()
+        user = get_object_or_404(queryset)
+        serializer = DogSerializer(user)
+       
+    # This is good
     def retrieve(self, request, pk=None):
+        queryset = Dog.objects.create()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = DogSerializer(user)
+        return Response(serializer.data)
+    
+    # Needs to update a dog by ID
+    def update(self, request, pk=None):
         queryset = Dog.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = DogSerializer(user)
         return Response(serializer.data)
-
-
+    
+    # Needs to delete a dog by ID
+    def destroy(self, request, pk=None):
+        queryset = Dog.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = DogSerializer(user)
+        return Response(serializer.data)
+    
 # Viewset for breeds  
 class BreedViewSet(viewsets.ViewSet):
+    # This is good 
     def list(self, request):
         queryset = Breed.objects.all()
         serializer = BreedSerializer(queryset, many=True)
         return Response(serializer.data)
-  
+
+    # Needs to create a breed
+    def create(self, request):
+        queryset = Breed.objects.all()
+        user = get_object_or_404(queryset)
+        serializer = BreedSerializer(user)
+        return Response(serializer.data)
+
+    # This is good
     def retrieve(self, request, pk=None):
+        queryset = Breed.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = BreedSerializer(user)
+        return Response(serializer.data)
+    
+    # Needs to update a breed by ID
+    def update(self, request, pk=None):
+        queryset = Breed.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = BreedSerializer(user)
+        return Response(serializer.data)
+    
+    # Needs to delete a breed by ID
+    def destroy(self, request, pk=None):
         queryset = Breed.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = BreedSerializer(user)
