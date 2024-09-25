@@ -17,8 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from dogapi.views import rest_get_dog
+from dogapi.views import rest_get_breed
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
+    
+    # My dog thing from an older lab
     path('rest/dog/<int:dog_id>/', rest_get_dog, name='rest_get_dog'),
+
+    # My new Breed URL which I may or may not use, but I did all the other work.
+    path('rest/breed/<int:breed_id>/', rest_get_breed, name='rest_get_breed'),
 ]
