@@ -1,5 +1,8 @@
 from django.db import models
 
+# For validating integers bound, but I never got around to implementing it.....  
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 class Dog(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()

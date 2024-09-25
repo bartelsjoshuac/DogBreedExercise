@@ -18,11 +18,12 @@ router = DefaultRouter()
 
 router.register(r'api/dogs', DogViewSet, basename='dog')
 router.register(r'api/breeds', BreedViewSet, basename='breed')
+
 from rest_framework.routers import DefaultRouter
 
 urlpatterns = router.urls
 
-# Need to work my admin GUI into the router I guess????
+# Need to work my admin GUI into the router I guess?  I did try a few things with no luck
 #urlpatterns = [
     
 #    path('admin/', admin.site.urls),

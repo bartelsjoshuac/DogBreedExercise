@@ -22,7 +22,7 @@ from rest_framework.response import Response
 from dogapi.serializers import DogSerializer
 
 
-# Get Dog by ID  -- Works
+# Get Dog by ID 
 @api_view(['GET'])
 def rest_get_dog(request, dog_id):
     try:
@@ -42,45 +42,37 @@ def rest_get_breed(request, breed_id):
     except Breed.DoesNotExist:
         return Response({'error': 'Breed not found.'}, status=status.HTTP_404_NOT_FOUND)
     
-# NEW #########################################################################################
+###################################################################################################
 # Viewset for dogs  
 class DogViewSet(viewsets.ViewSet):
-    # This is good
+    #### This is good
     def list(self, request):
         queryset = Dog.objects.all()
         serializer = DogSerializer(queryset, many=True)
         return Response(serializer.data)
 
     # Needs to create a dog
-    def create(self, request):
-        queryset = Dog.objects.all()
-        user = get_object_or_404(queryset)
-        serializer = DogSerializer(user)
-       
+    def create(self, request):    
+        return Response({'success': 'This would create a dog.'}, status=status.HTTP_200_OK)
+        
     # This is good
     def retrieve(self, request, pk=None):
-        queryset = Dog.objects.create()
+        queryset = Dog.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = DogSerializer(user)
         return Response(serializer.data)
     
     # Needs to update a dog by ID
     def update(self, request, pk=None):
-        queryset = Dog.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = DogSerializer(user)
-        return Response(serializer.data)
+        return Response({'success': 'This would update a dog by ID.'}, status=status.HTTP_200_OK)
     
     # Needs to delete a dog by ID
     def destroy(self, request, pk=None):
-        queryset = Dog.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = DogSerializer(user)
-        return Response(serializer.data)
+      return Response({'success': 'This would delete a dog by ID.'}, status=status.HTTP_200_OK)
     
 # Viewset for breeds  
 class BreedViewSet(viewsets.ViewSet):
-    # This is good 
+    #### This is good 
     def list(self, request):
         queryset = Breed.objects.all()
         serializer = BreedSerializer(queryset, many=True)
@@ -88,10 +80,7 @@ class BreedViewSet(viewsets.ViewSet):
 
     # Needs to create a breed
     def create(self, request):
-        queryset = Breed.objects.all()
-        user = get_object_or_404(queryset)
-        serializer = BreedSerializer(user)
-        return Response(serializer.data)
+        return Response({'success': 'This would create a breed.'}, status=status.HTTP_200_OK)
 
     # This is good
     def retrieve(self, request, pk=None):
@@ -102,15 +91,8 @@ class BreedViewSet(viewsets.ViewSet):
     
     # Needs to update a breed by ID
     def update(self, request, pk=None):
-        queryset = Breed.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = BreedSerializer(user)
-        return Response(serializer.data)
+        return Response({'success': 'This would update a breed by ID.'}, status=status.HTTP_200_OK)
     
     # Needs to delete a breed by ID
     def destroy(self, request, pk=None):
-        queryset = Breed.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = BreedSerializer(user)
-        return Response(serializer.data)
-
+         return Response({'success': 'This would delete a breed by ID.'}, status=status.HTTP_200_OK)
