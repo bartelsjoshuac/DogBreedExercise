@@ -56,10 +56,10 @@ class DogViewSet(viewsets.ViewSet):
         serializer = DogSerializer(user)
         return Response(serializer.data)
 
-dog_list = DogViewSet.as_view({'get': 'list'})
-dog_list = DogViewSet.as_view({'post': 'list'})
+dog_list = DogViewSet.as_view({'get' : 'list'})
+#dog_list = DogViewSet.as_view({'post': 'list'})
 
-# Not using this
+# Not using this yet
 dog_detail = DogViewSet.as_view({'get': 'retrieve'})
 
 # Viewset for breeds  
@@ -78,7 +78,5 @@ class BreedViewSet(viewsets.ViewSet):
 breed_list = BreedViewSet.as_view({'get': 'list'})
 breed_list = BreedViewSet.as_view({'post': 'list'})
 
-# Not using this
+# Not using this yet
 breed_detail = BreedViewSet.as_view({'get': 'retrieve'})
-
-#######################################################################################
