@@ -42,7 +42,7 @@ def rest_get_breed(request, breed_id):
     except Breed.DoesNotExist:
         return Response({'error': 'Breed not found.'}, status=status.HTTP_404_NOT_FOUND)
     
-
+##########################################################################################
 # Viewset for dogs  
 class DogViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -57,6 +57,9 @@ class DogViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 dog_list = DogViewSet.as_view({'get': 'list'})
+dog_list = DogViewSet.as_view({'post': 'list'})
+
+# Not using this
 dog_detail = DogViewSet.as_view({'get': 'retrieve'})
 
 # Viewset for breeds  
@@ -65,7 +68,7 @@ class BreedViewSet(viewsets.ViewSet):
         queryset = Breed.objects.all()
         serializer = BreedSerializer(queryset, many=True)
         return Response(serializer.data)
-
+  
     def retrieve(self, request, pk=None):
         queryset = Dog.objects.all()
         user = get_object_or_404(queryset, pk=pk)
@@ -73,4 +76,9 @@ class BreedViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 breed_list = BreedViewSet.as_view({'get': 'list'})
+breed_list = BreedViewSet.as_view({'post': 'list'})
+
+# Not using this
 breed_detail = BreedViewSet.as_view({'get': 'retrieve'})
+
+#######################################################################################
