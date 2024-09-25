@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from dogapi.views import rest_get_dog
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('rest/dog/<int:dog_id>/', rest_get_dog, name='rest_get_dog'),
 ]
