@@ -22,7 +22,7 @@ from rest_framework.response import Response
 from dogapi.serializers import DogSerializer
 
 
-# Get Dog by ID  -- Works
+# Get Dog by ID 
 @api_view(['GET'])
 def rest_get_dog(request, dog_id):
     try:
@@ -32,7 +32,7 @@ def rest_get_dog(request, dog_id):
     except Dog.DoesNotExist:
         return Response({'error': 'Dog not found.'}, status=status.HTTP_404_NOT_FOUND)
     
-# Get Breed by ID  --Works
+# Get Breed by ID 
 @api_view(['GET'])
 def rest_get_breed(request, breed_id):
     try:
@@ -42,7 +42,7 @@ def rest_get_breed(request, breed_id):
     except Breed.DoesNotExist:
         return Response({'error': 'Breed not found.'}, status=status.HTTP_404_NOT_FOUND)
     
-##########################################################################################
+# NEW #########################################################################################
 # Viewset for dogs  
 class DogViewSet(viewsets.ViewSet):
     def list(self, request):
@@ -56,11 +56,6 @@ class DogViewSet(viewsets.ViewSet):
         serializer = DogSerializer(user)
         return Response(serializer.data)
 
-dog_list = DogViewSet.as_view({'get' : 'list'})
-#dog_list = DogViewSet.as_view({'post': 'list'})
-
-# Not using this yet
-dog_detail = DogViewSet.as_view({'get': 'retrieve'})
 
 # Viewset for breeds  
 class BreedViewSet(viewsets.ViewSet):
@@ -77,6 +72,5 @@ class BreedViewSet(viewsets.ViewSet):
 
 breed_list = BreedViewSet.as_view({'get': 'list'})
 breed_list = BreedViewSet.as_view({'post': 'list'})
-
 # Not using this yet
 breed_detail = BreedViewSet.as_view({'get': 'retrieve'})
