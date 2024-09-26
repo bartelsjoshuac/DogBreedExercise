@@ -20,15 +20,24 @@ class Dog(models.Model):
         return self.name
     
 class Breed(models.Model):
-    name = models.CharField(max_length=100)   
+    name = models.CharField(max_length=100)
     SIZE_CHOICES = ( 
     ('Tiny', 'Tiny'), 
     ('Small', 'Small'), 
     ('Medium', 'Medium'), 
-    ('Large', 'Large'), 
+    ('Large', 'Large'),
     ) 
-    size = models.CharField(max_length=6, choices=SIZE_CHOICES)  
+
+    size = models.CharField(max_length=6, sizes=SIZE_CHOICES)
+        
+    # Int values 1-5 only, and this is working
+    # So how can I capture the error in my view when the validator fails, vs. just the general failure?
     friendliness = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     trainability = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     sheddingamount = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     exerciseneeds = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
+
+
+
+
+ 
