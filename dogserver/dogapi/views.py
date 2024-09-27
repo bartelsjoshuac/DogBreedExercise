@@ -51,8 +51,9 @@ def rest_get_breed(request, breed_id):
         return Response({'error': 'Breed not found.'}, status=status.HTTP_404_NOT_FOUND)
     
 ###################################################################################################
-# Note I used HTTP_417_EXPECTATION_FAILED in debuging vs. 404, as when I was calling /dog/# I would get 404 for the dog if it was alerady gone and this made it is easier to differentiate if it was my code or if I need to make more dogs and brreds 
-#
+# Note I used HTTP_417_EXPECTATION_FAILED in debuging vs. 404, as when I was calling /dog/# I would get 404 for the dog if it was already gone 
+# and this made it is easier to differentiate if it was my code or if I need to make more dogs and bredes 
+
 # Viewset for dogs  
 
 ##### Looks good!!!!
@@ -72,8 +73,8 @@ class DogViewSet(ModelViewSet):
         serializer = DogSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'success': 'This created a dog.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'This should have created a dog but did not .'}, status=status.HTTP_417_EXPECTATION_FAILED)
+            return Response(serializer.data)
+        return Response({'error': 'This should have created a dog but did not but failed .'}, status=status.HTTP_417_EXPECTATION_FAILED)
     
     # Retrive a dog by ID
     def retrieve(self, request, pk=None):
@@ -89,8 +90,8 @@ class DogViewSet(ModelViewSet):
         serializer = DogSerializer(dog, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'success': 'This  updated a dog by ID.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'This should have updated a dog by ID.'}, status=status.HTTP_417_EXPECTATION_FAILED)
+            return Response(serializer.data)
+        return Response({'error': 'This should have updated a dog by ID but failed.'}, status=status.HTTP_417_EXPECTATION_FAILED)
     
     # This deletes a dog
     def destroy(self, request, pk=None):
@@ -119,8 +120,8 @@ class BreedViewSet(viewsets.ModelViewSet):
         serializer = BreedSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'success': 'This  created a breed.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'This should have created a breed but did not .'}, status=status.HTTP_417_EXPECTATION_FAILED)
+            return Response(serializer.data)
+        return Response({'error': 'This should have created a breed but did not, but failed.'}, status=status.HTTP_417_EXPECTATION_FAILED)
 
     # Retrieve a breed by ID
     def retrieve(self, request, pk=None):
@@ -136,8 +137,8 @@ class BreedViewSet(viewsets.ModelViewSet):
         serializer = BreedSerializer(breed, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({'success': 'This updated a breed by ID.'}, status=status.HTTP_200_OK)
-        return Response({'error': 'This should have updated a breed by ID.'}, status=status.HTTP_417_EXPECTATION_FAILED)
+            return Response(serializer.data)
+        return Response({'error': 'This should have updated a breed by ID but failed.'}, status=status.HTTP_417_EXPECTATION_FAILED)
     
     # This deletes a breed
     def destroy(self, request, pk=None):
