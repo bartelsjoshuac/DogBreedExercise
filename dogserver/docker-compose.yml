@@ -29,4 +29,6 @@ volumes:
   db-data:                
 
 networks:
-  app-network:             
+  app-network:          
+
+# Command  not needed?
