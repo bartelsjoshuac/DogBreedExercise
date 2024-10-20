@@ -7,4 +7,4 @@ User1  normal_word
 
 
 # -d is detached
-  docker run -d -p 8080:8080 dogserve
+  docker run -p 8080:8080 dogserver

@@ -2,7 +2,7 @@
 FROM postgres:latest
 
 # Set environment variables for Postgres
-ENV POSTGRES_USER=bduser
+ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=password
 ENV POSTGRES_DB=dogserver
 
