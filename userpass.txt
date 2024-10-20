@@ -1,3 +1,10 @@
 userpass
 root password
 User1  normal_word
+
+
+ docker build -t dogserver .
+
+
+# -d is detached
+  docker run -d -p 8080:8080 dogserve

@@ -1,14 +1,15 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.11-slim
+# Don't use -slim as it has issues
+FROM python:3.11
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Notta clue where I got this
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONUNBUFFERED 1
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Install dependencies
+# Probably a could do this more dynically with the pip freeze.
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
