@@ -1,10 +1,6 @@
 # Don't use -slim as it has issues
 FROM python:3.11
 
-# Notta clue where I got this
-# ENV PYTHONDONTWRITEBYTECODE 1
-# ENV PYTHONUNBUFFERED 1
-
 # Set the working directory in the container
 WORKDIR /app
 
