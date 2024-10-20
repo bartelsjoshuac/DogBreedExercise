@@ -85,12 +85,10 @@ WSGI_APPLICATION = 'dogserver.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'dogserver',     
         'NAME': 'dogserverdb',
         'USER': 'postgres',     
         'PASSWORD': 'password',      
-        'HOST': 'db',              
-        #'HOST': 'db-1',
+        'HOST': 'db',
         'PORT': '5432',                   
     }
 }
