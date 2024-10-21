@@ -1,10 +1,15 @@
-userpass
-root password
-User1  normal_word
+
+#root password
 
 
+
+#Build contains
  docker build -t dogserver .
 
-
+# Run contaier
 # -d is detached
   docker run -p 8080:8080 dogserver
+
+
+# Get a shell in my container
+  docker compose exec web bash

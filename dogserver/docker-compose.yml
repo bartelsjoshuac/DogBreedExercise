@@ -8,13 +8,16 @@ services:
     volumes:
     ### Set the working directory to the app and copy files there
       - .:/app
+    # This is questinable if it works, as all it makes sure is that the DB is running, not that it is listening on a port.
     depends_on:
       - db
     ### This is needed to insure that the web can restart and connect to the DN      
     restart: always         
-    # This will
+    # This will pass the start command (and do the migration) at statup time, vs using CMD in the dockerfile for the web app itself.
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
  
+
+ # This builds a new postgres DB each time but using the persistant volume
   db:
     image: postgres
     ports:
