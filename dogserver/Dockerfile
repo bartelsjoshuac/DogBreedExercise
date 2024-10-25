@@ -10,7 +10,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the project files
-COPY . /app/
+#COPY . /app/
 
 ### Removed since we are doing it in the docker-compose file in a cmd
 #EXPOSE 8000
